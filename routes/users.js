@@ -10,7 +10,7 @@ router.get(
   "/",
   [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
-    console.log(req.user);
+    // console.log(req.user);
     try {
       const users = await Users.find();
       return res.status(200).send({
