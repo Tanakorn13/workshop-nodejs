@@ -69,7 +69,6 @@ router.get(
     try {
       const productId = req.params.id;
       const orders = await Orders.find({ productId }).populate("productId");
-
       console.log(orders);
       res.json(orders);
     } catch (error) {
@@ -114,7 +113,7 @@ router.post(
   async function (req, res, next) {
     const id = req.params.id;
     try {
-      const { product_name,amount, productId } = req.body;
+      const { product_name, amount, productId } = req.body;
 
       const product = await productModel.findById(id);
 
