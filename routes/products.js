@@ -114,7 +114,7 @@ router.post(
   async function (req, res, next) {
     const id = req.params.id;
     try {
-      const { product_name, amount, productId } = req.body;
+      const { product_name,amount, productId } = req.body;
 
       const product = await productModel.findById(id);
 
@@ -135,7 +135,7 @@ router.post(
       }
       // Create a new order
       const newOrder = new Orders({
-        product_name,
+        product_name: product.product_name,
         amount,
         productId: id,
       });
