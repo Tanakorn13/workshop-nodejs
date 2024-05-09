@@ -1,8 +1,12 @@
 #  Welcome to workshop Nodejs + Express
 install package
 
-```npm i```
+```
+npm I
+```
 
 start
 
-```npm run start```
+```
+npm run start
+```
