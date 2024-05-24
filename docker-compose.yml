@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  noom:
+    container_name: "test-container"
+    restart: always
+    build: .
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    networks:
+      - default
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo
+    container_name: "mongodb_test"
+    environment:
+      MONGO_INITDB_DATABASE: workshop-nodejs
+    restart: always
+    ports:
+      - 37017:27017
+    networks:
+      - default
+    healthcheck:
+      test: "exit 0" # Replace with a real health check script if needed
+
+networks:
+  default:
