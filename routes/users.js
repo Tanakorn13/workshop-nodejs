@@ -8,7 +8,7 @@ const roleGuard = require("../middleware/roleGuard");
 /* GET users listing. */
 router.get(
   "/",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     // console.log(req.user);
     try {

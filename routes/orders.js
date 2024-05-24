@@ -5,7 +5,7 @@ const passport = require("../middleware/passport");
 const roleGuard = require("../middleware/roleGuard");
 router.get(
   "/",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     try {
       let orders = await Orders.find();

@@ -9,7 +9,7 @@ const passport = require("../middleware/passport");
 const roleGuard = require("../middleware/roleGuard");
 router.get(
   "/",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     try {
       let products = await productModel.find();
@@ -31,7 +31,7 @@ router.get(
 
 router.get(
   "/:id",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     let id = req.params.id;
     // console.log(id);
@@ -64,7 +64,7 @@ router.get(
 
 router.get(
   "/:id/orders",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     try {
       const productId = req.params.id;
@@ -80,13 +80,15 @@ router.get(
 
 router.post(
   "/",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     try {
-      const { product_name, price, amount } = req.body;
+      const { product_name, descript, product_img, price, amount } = req.body;
       // console.log(product_name, price, amount);
       let newProduct = new productModel({
         product_name: product_name,
+        descript: descript,
+        product_img: product_img,
         price: price,
         amount: amount,
       });
@@ -98,6 +100,7 @@ router.post(
         success: true,
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).send({
         status: 500,
         message: "create fail",
@@ -109,7 +112,7 @@ router.post(
 
 router.post(
   "/:id/orders",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     const id = req.params.id;
     try {
@@ -167,10 +170,10 @@ router.post(
 
 router.put(
   "/:id",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     const id = req.params.id;
-    const { product_name, price, amount } = req.body;
+    const { product_name, descript, product_img, price, amount } = req.body;
 
     try {
       // check product in db
@@ -185,6 +188,8 @@ router.put(
 
       // Update product fields
       product.product_name = product_name;
+      product.descript = descript;
+      product.product_img = product_img;
       product.price = price;
       product.amount = amount;
 
@@ -210,7 +215,7 @@ router.put(
 
 router.delete(
   "/:id",
-  [passport, roleGuard(["user", "admin"])],
+  // [passport, roleGuard(["user", "admin"])],
   async function (req, res, next) {
     try {
       const id = req.params.id;
